@@ -71,7 +71,7 @@ def indeed_scraping(url, query_number=0):
     if query_number < 300 & query_number % 10 == 0:
         query_number = query_number + 10
     jobs_query = url + str(query_number)
-    #indeed_scraping(url, query_number) 
+    indeed_scraping(url, query_number) 
 
     response = requests.get(str(jobs_query))
     #print(response)
@@ -87,7 +87,7 @@ def indeed_scraping(url, query_number=0):
         except:
             job_salary.append("Empty Salary")
 
-    for x in range(len(soup_title)):
+    #for x in range(len(soup_title)):
         for _div in soup_description:
             ul = _div.find_all("ul")
             for _ul in ul:
@@ -96,7 +96,7 @@ def indeed_scraping(url, query_number=0):
                     job_description.append(_li.text)
     
     
-    for x in range(len(soup_title)):
+    #for x in range(len(soup_title)):
         job_title.append(soup_title[x].a['title'])
         job_link.append('https://www.indeed.com' + soup_title[x].a['href'])
         job_company.append(soup_company[x].text.strip())
@@ -120,7 +120,7 @@ def indeed_scraping(url, query_number=0):
 
 #   Calling the function with relevant query numbers beginning with 0
 
-indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
+#indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
 
 
 
@@ -137,14 +137,14 @@ indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&st
 data = { 'Job Title': job_title, 'Job Link': job_link, 'Job Company': job_company, \
          'Job Salary': job_salary, 'Job Description': job_description}
 
-df = pd.DataFrame.from_dict(data, orient='index') 
+#df = pd.DataFrame.from_dict(data, orient='index') 
 #columns =
 #['Job Title','Job Link','Job Company','Job Salary','Job Description'])
-df.transpose()
-df.to_csv('python-jobs-from-indeed.csv', index=False, header = True, encoding='utf-8')
+#df.transpose()
+#df.to_csv('python-jobs-from-indeed.csv', index=False, header = True, encoding='utf-8')
     
-#if __name__ == '__main__':
-    #indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
+if __name__ == '__main__':
+    indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
     #make_csv()
 
         
