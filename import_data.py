@@ -1,4 +1,5 @@
 
+from app import db, Jobs
 from bs4 import BeautifulSoup
 import requests
 import csv
