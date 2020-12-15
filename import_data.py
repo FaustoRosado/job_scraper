@@ -1,8 +1,7 @@
-
-from app import db, Jobs
+from app import db, JobTable
 from bs4 import BeautifulSoup
 import requests
-import csv
+
 
 """                     -Testing before creating functions-
 
@@ -51,31 +50,31 @@ job_description = []
 
 jobs_list = [job_title, job_link, job_company, job_salary, job_description]
 
-#   Defining scraping function, getting first 300 jobs across pages using queries
+#   Defining scraping function, getting first 450 jobs across pages using query params
 #   starting at start=0 for first 15 jobs, start=10 for next 15, and so on through 
-#   start=290 for total of 450 jobs 
+#   start=290 for jobs across 30 pages 
 
-def indeed_scraping(url, query_number=0):
+def indeed_scraping(url, query_number):
     jobs_query = url + str(query_number)
     #print(jobs_query)
     if query_number <= 290:
-        query_number = query_number + 10
+        query_number += 10
         #print(query_number)
         indeed_scraping(url, query_number)
 
     response = requests.get(str(jobs_query))
     #print(response)
     soup = BeautifulSoup(response.content,"html.parser")
-    soup_title = soup.findAll('h2',{"class":"title"})
-    soup_company = soup.findAll("span",{"class":"company"})
-    soup_salary = soup.findAll("span",{"class":"salaryText"})
-    soup_description = soup.findAll("div",{"class":"summary"})
+    soup_title = soup.find_all('h2',{"class":"title"})
+    soup_company = soup.find_all("span",{"class":"company"})
+    soup_salary = soup.find_all("span",{"class":"salaryText"})
+    soup_description = soup.find_all("div",{"class":"summary"})
 
     for x in range(len(soup_title)):
         try:
             job_salary.append(soup_salary[x].text.strip())
         except:
-            job_salary.append("Empty Salary")
+            job_salary.append("No salary given")
 
     #for x in range(len(soup_title)):
         for _div in soup_description:
@@ -91,22 +90,35 @@ def indeed_scraping(url, query_number=0):
         job_link.append('https://www.indeed.com' + soup_title[x].a['href'])
         job_company.append(soup_company[x].text.strip())
         
-        
+    #indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)    
     
     
-def make_csv():
-    with open('indeed-python-jobs.csv', 'w') as filename:
+# def make_csv():
+#     with open('indeed-python-jobs.csv', 'w') as filename:
     
-        file = csv.writer(filename)
-        #file.writerow(['Title', 'Link', 'Company', 'Salary', 'Description'])
-        for info in jobs_list:
-            file.writerow(info)
-    
+#         file = csv.writer(filename)
+#         #file.writerow(['Title', 'Link', 'Company', 'Salary', 'Description'])
+#         for info in jobs_list:
+#             file.writerow(info)
+def main():
+    db.drop_all()
+    db.create_all()
+
+    for index, job in enumerate(jobs_list[0]):
+        new_row = JobTable(title = job, link = jobs_list[1][index], company = jobs_list[2][index], salary = jobs_list[3][index], description = jobs_list[4][index] )
+        print(new_row)
+        db.session.add(new_row)
+        db.session.commit()
+
 if __name__ == '__main__':
     indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
-    make_csv()
+    main()
+    #print(jobs_list)
 
-        
+
+
+
+    
 
 
 

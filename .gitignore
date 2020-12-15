@@ -128,3 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
+
+# csv file
+indeed-python-jobs.csv
+
+#db
+indeed_jobs.db
