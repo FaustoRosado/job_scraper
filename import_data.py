@@ -3,43 +3,6 @@ from bs4 import BeautifulSoup
 import requests
 
 
-"""                     -Testing before creating functions-
-
-url = 'https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start='
-response = requests.get(url)
-print(response)
-soup = BeautifulSoup(response.content, "html.parser")
-soup_title = soup.findAll('h2',{"class":"title"})
-print(len(soup_title))
-
-for x in range(15):
-   print('https://www.indeed.com' + soup_title[x].a['href'])
-for x in range(15):
-   print(soup_title[x].a['title'])
-
-soup_company = soup.findAll("span",{"class":"company"})
-
-for x in range(15):
-    print((soup_company[x].text.strip()))
-
-soup_salary = soup.findAll("span",{"class":"salaryText"})
-for x in range(15):
-    try:
-        print((soup_salary[x].text.strip()))
-    except:
-        print("Empty Salary")
-
-soup_description = soup.findAll("div",{"class":"summary"})
-
-for x in range(15):
-    for _div in soup_description:
-        ul = _div.find_all("ul")
-        for _ul in ul:
-            li = _ul.find_all("li")
-            for _li in li:
-                print(_li.text)
-"""
-
 #   Creating empty lists with variables
 
 job_title = []
