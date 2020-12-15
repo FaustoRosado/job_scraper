@@ -9,7 +9,6 @@ from flask_sqlalchemy import SQLAlchemy
 # change the columns to reflect the columns you need
 # each row of your data will be an instance of this class
 
-#data = jobs_list
 
 app = Flask(__name__)
 
@@ -38,7 +37,7 @@ class JobTable(db.Model):
 #     def __repr__(self):
 #         return f"<Data {self.id} {self.job_title} {self.job_link} {self.job_company}
 #          {self.job_salary} {self.job_description}>"    
-# #
+# 
 # VIEWS 
 #
 
@@ -67,8 +66,7 @@ def other():
 @app.route('/api', methods=['GET'])
 def get_data():
     table = JobTable.query.all()
-    # d = {row.id:[row.title,row.link,row.company,
-    #     row.salary,row.description]}
+   
     d = []
     for row in table:
         job_dict = {
@@ -96,12 +94,7 @@ def delete_data():
         pass
     return jsonify({})
 
-#
-# CODE TO BE EXECUTED WHEN RAN AS SCRIPT
-#
+
 
 if __name__ == '__main__':
-    #main()
     app.run(debug=True)
-    db.drop_all()
-    db.create_all()
