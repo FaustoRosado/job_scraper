@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div>
+    {% for row in data %}
+        <div>
+            <h2>{{row.company}}</h2>
+            <h3>{{row.title}}</h3>
+            <h3>{{row.salary}}</h3>
+            <p>{{row.description}}</p>
+            <a href={{row.link}}>Apply Here</a>
+            <br>
+            <br>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+
+
+{% endblock %}
