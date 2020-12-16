@@ -129,6 +129,12 @@ dmypy.json
 .pyre/
 .DS_Store
 
+# Python
+*.pyc
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
 # csv file
 indeed-python-jobs.csv
 
