@@ -24,6 +24,8 @@ def indeed_scraping(url, query_number):
         query_number += 10
         #print(query_number)
         indeed_scraping(url, query_number)
+        
+        
 
     response = requests.get(str(jobs_query))
     #print(response)
@@ -56,20 +58,13 @@ def indeed_scraping(url, query_number):
     #indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)    
     
     
-# def make_csv():
-#     with open('indeed-python-jobs.csv', 'w') as filename:
-    
-#         file = csv.writer(filename)
-#         #file.writerow(['Title', 'Link', 'Company', 'Salary', 'Description'])
-#         for info in jobs_list:
-#             file.writerow(info)
 def main():
     db.drop_all()
     db.create_all()
 
     for index, job in enumerate(jobs_list[0]):
         new_row = JobTable(title = job, link = jobs_list[1][index], company = jobs_list[2][index], salary = jobs_list[3][index], description = jobs_list[4][index] )
-        print(new_row)
+        #print(new_row)
         db.session.add(new_row)
         db.session.commit()
 
