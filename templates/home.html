@@ -3,7 +3,7 @@
 {% block body %}
 <div>
     {% for row in data %}
-        <div>
+        <!-- <div>
             <h2>{{row.company}}</h2>
             <h3>{{row.title}}</h3>
             <h3>{{row.salary}}</h3>
@@ -11,7 +11,16 @@
             <a href={{row.link}}>Apply Here</a>
             <br>
             <br>
-        </div>
+        </div> -->
+
+        <div class="card text-center">
+            <h5 class="card-header">{{row.company}}</h5>
+            <div class="card-body">
+              <h5 class="card-title">{{row.title}}</h5>
+              <p class="card-text">{{row.description}}</p>
+              <a href={{row.link}} class="btn btn-primary">Apply Here</a>
+            </div>
+          </div>
     {% endfor %}
 </div>
 
