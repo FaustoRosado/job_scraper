@@ -138,5 +138,5 @@ dmypy.json
 # csv file
 indeed-python-jobs.csv
 
-#db
-indeed_jobs.db
+# Database
+*.db
