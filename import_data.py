@@ -69,7 +69,7 @@ def main():
         db.session.commit()
 
 if __name__ == '__main__':
-    indeed_scraping('https://www.indeed.com/jobs?q=Python&l=New+York,+NY&radius=0&start=', 0)
+    indeed_scraping('https://www.indeed.com/jobs?q=python&l=New+York,+NY&radius=0&start=', 0)
     main()
     #print(jobs_list)
 
